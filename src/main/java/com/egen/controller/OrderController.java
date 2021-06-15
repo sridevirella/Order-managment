@@ -18,7 +18,7 @@ public class OrderController {
     @GetMapping("order")
     public ResponseEntity<List<Order>> getAllOrders(){
         //TODO
-        return ResponseEntity.ok(Collections.singletonList(new Order("id")));
+        return ResponseEntity.ok(Collections.singletonList(new Order()));
     }
 
     public ResponseEntity<List<Order>> getOrderById(String id){
