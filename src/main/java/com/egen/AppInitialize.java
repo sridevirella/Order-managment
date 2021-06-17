@@ -3,9 +3,6 @@ package com.egen;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInitialize extends AbstractAnnotationConfigDispatcherServletInitializer{
-	/**
-	 * implement the following methods
-	 */
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
