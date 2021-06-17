@@ -39,7 +39,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         String sqlQuery = "SELECT S.order_id\n" +
                           "FROM (SELECT o.order_id, max(o.order_total)  as order_total" +
                                 "  FROM orders o, shipping s" +
-                                "  WHERE o.order_id = s.order_order_id and s.order_shipping_zip = \"10\"" +
+                                "  WHERE o.order_id = s.order_order_id and s.order_shipping_zip = :zip" +
                                 "  GROUP BY o.order_id" +
                                 "  ORDER BY o.order_total DESC" +
                                 "  limit 10" +
@@ -47,7 +47,7 @@ public class OrderRepositoryImpl implements OrderRepository {
                                 " INNER JOIN orders S" +
                                 "  ON highestAmount.order_id = S.order_id" +
                                 "  AND highestAmount.order_total = S.order_total";
-       return entityManager.createNativeQuery(sqlQuery).getResultList();
+       return entityManager.createNativeQuery(sqlQuery).setParameter("zip", zip).getResultList();
     }
 
     public Order create(Order order) {
