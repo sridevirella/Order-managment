@@ -3,14 +3,10 @@ package com.egen;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInitialize extends AbstractAnnotationConfigDispatcherServletInitializer{
-/**
- * implement the following methods
- */
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[0];
-
+		return new Class<?>[] {AppConfig.class, JPAConfig.class};
 	}
 
 	@Override
@@ -20,6 +16,6 @@ public class AppInitialize extends AbstractAnnotationConfigDispatcherServletInit
 
 	@Override
 	protected String[] getServletMappings() {
-		return new  String[]{};
+		return new  String[]{"/"};
 	}
 }
