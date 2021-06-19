@@ -30,22 +30,22 @@ public class OrderController {
         return new ResponseEntity<>(orderService.getOrderById(orderId), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/between")
+    @GetMapping(value = "/between", params = {"startTime", "endTime"})
     public ResponseEntity<List<OrderDTO>> getAllOrdersWithInInterval(@RequestParam("startTime") ZonedDateTime startTime,
                                                                      @RequestParam("endTime") ZonedDateTime endTime) {
 
         return new ResponseEntity<>(orderService.getAllOrdersWithInInterval(startTime, endTime), HttpStatus.OK);
     }
 
-    @RequestMapping (method = RequestMethod.GET, value = "/search")
+    @RequestMapping (method = RequestMethod.GET, value = "/search", params = {"zip"})
     public ResponseEntity<List<OrderDTO>> top10OrdersWithHighestDollarAmountInZip(@RequestParam("zip") String zip) {
 
         return new ResponseEntity<>(orderService.top10OrdersWithHighestDollarAmountInZip(zip), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<OrderDTO> placeOrder(@RequestBody OrderDTO orderDTO) {
-        return new ResponseEntity<>(orderService.placeOrder(new OrderMapper().convertToOrderEntity(orderDTO)), HttpStatus.CREATED);
+    public ResponseEntity<OrderDTO> placeOrder(@RequestBody OrderDTO order) {
+        return new ResponseEntity<>(orderService.placeOrder(order), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/cancel/{id}")
@@ -54,7 +54,7 @@ public class OrderController {
     }
 
     @PutMapping
-    public ResponseEntity<OrderDTO> updateOrder(@RequestBody OrderDTO orderDTO) {
-        return new ResponseEntity<>(orderService.updateOrder(new OrderMapper().convertToOrderEntity(orderDTO)), HttpStatus.OK);
+    public ResponseEntity<OrderDTO> updateOrder(@RequestBody OrderDTO order) {
+        return new ResponseEntity<>(orderService.updateOrder(order), HttpStatus.OK);
     }
 }

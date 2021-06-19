@@ -12,7 +12,7 @@ public interface OrderService {
     List<OrderDTO> getOrderById(String id);
     List<OrderDTO> getAllOrdersWithInInterval(ZonedDateTime startTime, ZonedDateTime endTime);
     List<OrderDTO> top10OrdersWithHighestDollarAmountInZip(String zip);
-    OrderDTO placeOrder(Order order);
+    OrderDTO placeOrder(OrderDTO order);
     OrderDTO cancelOrder(String orderId);
-    OrderDTO updateOrder(Order order);
+    OrderDTO updateOrder(OrderDTO order);
 }

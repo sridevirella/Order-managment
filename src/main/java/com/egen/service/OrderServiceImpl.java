@@ -8,6 +8,7 @@ import com.egen.mapper.OrderMapper;
 import com.egen.model.entity.Order;
 import com.egen.model.enums.OrderStatus;
 import com.egen.repository.OrderRepository;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -87,9 +88,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDTO placeOrder(Order order) {
+    public OrderDTO placeOrder(OrderDTO orderDTO) {
 
         try {
+            Order order = new OrderMapper().convertToOrderEntity(orderDTO);
             orderRepository.create(order);
             return new OrderMapper().convertToOrderDTO(order);
 
@@ -115,9 +117,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDTO updateOrder(Order order) {
+    public OrderDTO updateOrder(OrderDTO orderDTO) {
 
         try {
+            Order order = new OrderMapper().convertToOrderEntity(orderDTO);
             //check if order is already dispatched
             Order _order = orderRepository.findById(order.getOrderId());
 
